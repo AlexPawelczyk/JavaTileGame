@@ -2,6 +2,7 @@ package dev.pawelczyk.tilegame.states;
 
 import java.awt.Graphics;
 
+import dev.pawelczyk.tilegame.Game;
 import dev.pawelczyk.tilegame.entities.creatures.Player;
 import dev.pawelczyk.tilegame.gfx.Assets;
 
@@ -9,8 +10,9 @@ public class GameState extends State {
 	
 	private Player player;
 	
-	public GameState() {
-		player = new Player(100, 100);
+	public GameState(Game game) {
+		super(game);
+		player = new Player(game, 100, 100);
 		
 	}
 

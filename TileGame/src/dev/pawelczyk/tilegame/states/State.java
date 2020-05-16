@@ -2,6 +2,8 @@ package dev.pawelczyk.tilegame.states;
 
 import java.awt.Graphics;
 
+import dev.pawelczyk.tilegame.Game;
+
 public abstract class State {
 	
 	
@@ -19,6 +21,12 @@ public abstract class State {
 	
 	
 	// STATE CLASS
+	protected Game game;
+	
+	public State(Game game) {
+		this.game = game;
+	}
+	
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);

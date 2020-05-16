@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import dev.pawelczyk.tilegame.display.Display;
 import dev.pawelczyk.tilegame.gfx.Assets;
+import dev.pawelczyk.tilegame.input.KeyManager;
 import dev.pawelczyk.tilegame.states.GameState;
 import dev.pawelczyk.tilegame.states.MenuState;
 import dev.pawelczyk.tilegame.states.State;
@@ -28,21 +29,25 @@ public class Game implements Runnable {
 	private State gameState;
 	private State menuState;
 	
+	// Input
+	private KeyManager keyManager;
+	
 	// constructor for Game
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.title = title;	
+		this.title = title;
+		keyManager = new KeyManager();
 	}
 	
 	// initialize display and graphics for game
 	private void init() {
 		display = new Display(title, width, height);
+		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
-		gameState = new GameState();
-		menuState = new MenuState();
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
 		State.setState(gameState);
-		
 	}
 	
 	private void render() {
@@ -73,6 +78,8 @@ public class Game implements Runnable {
 	}
 	
 	private void tick() {
+		keyManager.tick();
+		
 		// we have a current state that exists
 		if(State.getState() != null) {
 			State.getState().tick();
@@ -116,6 +123,10 @@ public class Game implements Runnable {
 			}	
 		}
 		stop();	
+	}
+	
+	public KeyManager getKeyManager() {
+		return keyManager;
 	}
 	
 	public synchronized void start() {
