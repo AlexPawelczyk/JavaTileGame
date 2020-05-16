@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import dev.pawelczyk.tilegame.Game;
 import dev.pawelczyk.tilegame.entities.creatures.Player;
 import dev.pawelczyk.tilegame.gfx.Assets;
+import dev.pawelczyk.tilegame.tiles.Tile;
 
 public class GameState extends State {
 	
@@ -24,7 +25,6 @@ public class GameState extends State {
 	@Override
 	public void render(Graphics g) {
 		player.render(g);
-		
 	}
 	
 
