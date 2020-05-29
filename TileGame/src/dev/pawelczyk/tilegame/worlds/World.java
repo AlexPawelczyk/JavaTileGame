@@ -42,8 +42,8 @@ public class World {
 		String[] tokens = file.split("\\s+"); // splits every number from txt file into separate string
 		width = Utils.parseInt(tokens[0]);
 		height = Utils.parseInt(tokens[1]);
-		spawnX = Utils.parseInt(tokens[2]);
-		spawnY = Utils.parseInt(tokens[3]);
+		this.setSpawnX(Utils.parseInt(tokens[2]));
+		this.setSpawnY(Utils.parseInt(tokens[3]));
 		
 		tiles = new int[width][height];
 		for(int y = 0; y < height; y++) {
@@ -51,11 +51,22 @@ public class World {
 				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]); // +4 because we manually set first 4 elements
 			}
 		}
-		
-		
-		
-		
-		
+	}
+
+	public int getSpawnX() {
+		return spawnX;
+	}
+
+	public void setSpawnX(int spawnX) {
+		this.spawnX = spawnX;
+	}
+
+	public int getSpawnY() {
+		return spawnY;
+	}
+
+	public void setSpawnY(int spawnY) {
+		this.spawnY = spawnY;
 	}
 
 }
