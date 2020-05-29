@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import dev.pawelczyk.tilegame.display.Display;
 import dev.pawelczyk.tilegame.gfx.Assets;
+import dev.pawelczyk.tilegame.gfx.GameCamera;
 import dev.pawelczyk.tilegame.input.KeyManager;
 import dev.pawelczyk.tilegame.states.GameState;
 import dev.pawelczyk.tilegame.states.MenuState;
@@ -16,7 +17,7 @@ import dev.pawelczyk.tilegame.states.State;
 public class Game implements Runnable {
 	// defining instance variables
 	private Display display;
-	public int width, height;
+	private int width, height;
 	public String title;
 	
 	private boolean running = false;
@@ -32,6 +33,9 @@ public class Game implements Runnable {
 	// Input
 	private KeyManager keyManager;
 	
+	// Camera
+	private GameCamera gameCamera;
+	
 	// constructor for Game
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -45,6 +49,7 @@ public class Game implements Runnable {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
+		gameCamera = new GameCamera(this, 0, 0);
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
 		State.setState(gameState);
@@ -127,6 +132,18 @@ public class Game implements Runnable {
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public GameCamera getGameCamera() {
+		return gameCamera;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
 	public synchronized void start() {

@@ -13,7 +13,7 @@ public class GameState extends State {
 	
 	public GameState(Game game) {
 		super(game);
-		world = new World("res/worlds/world1.txt");
+		world = new World(game, "res/worlds/world1.txt");
 		player = new Player(game, world.getSpawnX(), world.getSpawnY());
 	}
 

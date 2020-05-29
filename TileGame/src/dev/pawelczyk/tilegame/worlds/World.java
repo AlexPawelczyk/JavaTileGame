@@ -2,15 +2,18 @@ package dev.pawelczyk.tilegame.worlds;
 
 import java.awt.Graphics;
 
+import dev.pawelczyk.tilegame.Game;
 import dev.pawelczyk.tilegame.tiles.Tile;
 import dev.pawelczyk.tilegame.utils.Utils;
 
 public class World {
+	private Game game;
 	private int width, height; // width and height in terms of tiles (i.e., 5x5 tile world)
 	private int spawnX, spawnY;
 	private int[][] tiles;
 	
-	public World(String path) {
+	public World(Game game, String path) {
+		this.game = game;
 		loadWorld(path);
 	}
 	
@@ -21,7 +24,9 @@ public class World {
 	public void render(Graphics g) {
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
-				getTile(x, y).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+				getTile(x, y).render(g, 
+						(int) (x * Tile.TILE_WIDTH - game.getGameCamera().getxOffset()), 
+						(int) (y * Tile.TILE_HEIGHT - game.getGameCamera().getyOffset()));
 			}
 		}	
 	}

@@ -2,13 +2,17 @@ package dev.pawelczyk.tilegame.entities;
 
 import java.awt.Graphics;
 
+import dev.pawelczyk.tilegame.Game;
+
 public abstract class Entity {
 	
+	protected Game game;
 	protected float x, y; // position of entity on screen
 	protected int width, height; // width and height of entity
 	
 	
-	public Entity(float x, float y, int width, int height) {
+	public Entity(Game game, float x, float y, int width, int height) {
+		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.width = width;
